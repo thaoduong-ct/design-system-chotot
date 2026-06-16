@@ -184,11 +184,29 @@ Apply these labels and patterns directly when generating screens — no WebFetch
 
 ### Step 3 — Generate HTML
 
+**Output location (bắt buộc — không được thay đổi):**
+
+Tất cả file output PHẢI được lưu vào:
+```
+/Users/thaoduong/Downloads/screens/<tên-màn-hình>/
+```
+
+Không lưu vào root Downloads, không lưu vào Downloads/HTML, không dùng đường dẫn tương đối.
+
 **Output formats:**
-- **Single:** `/screens/<name>/index.html`
-- **Interactive:** Single file with hover/focus/active/error states + JS transitions
-- **Flow:** All screens stacked vertically, arrows showing transitions
-- **Multiple:** Separate files + `index.html` with links
+- **Single:** `/Users/thaoduong/Downloads/screens/<name>/index.html`
+- **Interactive:** `/Users/thaoduong/Downloads/screens/<name>/index.html` — single file với hover/focus/active/error states + JS transitions
+- **Flow:** `/Users/thaoduong/Downloads/screens/<name>/index.html` — tất cả screens xếp dọc nối tiếp nhau
+- **Multiple screens:** Mỗi màn hình một file riêng + `index.html` liệt kê links
+  ```
+  /Users/thaoduong/Downloads/screens/<name>/
+  ├── index.html         ← danh sách links
+  ├── screen-1.html
+  ├── screen-2.html
+  └── screen-3.html
+  ```
+
+**Tên thư mục:** Dùng kebab-case, tiếng Anh, ngắn gọn — ví dụ: `job-detail`, `checkout-mobile`, `seller-dashboard`.
 
 **Technical requirements:**
 - Self-contained HTML + inline CSS + inline JS (no external files)
@@ -207,7 +225,7 @@ Apply these labels and patterns directly when generating screens — no WebFetch
 | Nhà Tốt | `nha-tot-logo.png` |
 | Việc Làm Tốt | `viec-lam-tot-logo.png` |
 
-Copy from `logo/<file>` → `/screens/<name>/logo.png` → reference as `<img src="logo.png">`.
+Embed logo trực tiếp dưới dạng base64 trong `<img src="data:image/png;base64,...">` — không copy file riêng.
 
 ---
 
