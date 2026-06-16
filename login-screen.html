@@ -1,0 +1,671 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Đăng nhập - Chợ Tốt</title>
+  <style>
+    /* ===== CHOTOT DS TOKENS v3.0 ===== */
+    :root {
+      /* Primitives */
+      --gray-0: #ffffff;
+      --gray-25: #f7f7f7;
+      --gray-50: #f4f4f4;
+      --gray-75: #e8e8e8;
+      --gray-100: #dddddd;
+      --gray-200: #c0c0c0;
+      --gray-300: #a7a7a7;
+      --gray-400: #8c8c8c;
+      --gray-500: #737373;
+      --gray-600: #595959;
+      --gray-700: #404040;
+      --gray-900: #222222;
+
+      --chotot-50: #fff8d6;
+      --chotot-75: #ffe884;
+      --chotot-100: #ffd400;
+      --chotot-200: #ffc800;
+      --chotot-300: #ffba00;
+      --chotot-400: #cc8f00;
+
+      /* Semantic - Background */
+      --bg-primary: #ffffff;
+      --bg-app: #f7f7f7;
+      --bg-secondary: #f4f4f4;
+      --bg-tertiary: #e8e8e8;
+      --bg-brand: #ffd400;
+      --bg-brand-light: #fff8d6;
+      --bg-inverted: #222222;
+
+      /* Semantic - Border */
+      --border-divider: #f4f4f4;
+      --border-thin: #e8e8e8;
+      --border-regular: #dddddd;
+      --border-black: #222222;
+      --border-error: #f0325e;
+      --border-warning: #fb7328;
+      --border-disabled: #c0c0c0;
+      --border-brand: #ffd400;
+
+      /* Semantic - Text */
+      --text-primary: #222222;
+      --text-secondary: #595959;
+      --text-tertiary: #8c8c8c;
+      --text-error: #f0325e;
+      --text-warning: #fb7328;
+      --text-link: #306bd9;
+      --text-success: #12a154;
+      --text-on-background: #222222;
+      --text-blank: #ffffff;
+      --text-brand: #cc8f00;
+
+      /* Semantic - Icon */
+      --icon-primary: #222222;
+      --icon-secondary: #595959;
+      --icon-tertiary: #8c8c8c;
+      --icon-brand: #ffba00;
+      --icon-error: #f0325e;
+      --icon-success: #12a154;
+
+      /* Semantic - Button */
+      --btn-primary: #ffd400;
+      --btn-primary-hover: #ffe884;
+      --btn-primary-pressed: #ffba00;
+      --btn-neutral: #222222;
+      --btn-neutral-hover: #595959;
+      --btn-disabled: #c0c0c0;
+
+      /* Measurement - Spacing */
+      --gap-2: 2px;
+      --gap-4: 4px;
+      --gap-6: 6px;
+      --gap-8: 8px;
+      --gap-12: 12px;
+      --gap-16: 16px;
+      --gap-20: 20px;
+
+      /* Measurement - Padding */
+      --pad-2: 2px;
+      --pad-4: 4px;
+      --pad-8: 8px;
+      --pad-12: 12px;
+      --pad-16: 16px;
+      --pad-20: 20px;
+
+      /* Measurement - Radius */
+      --radius-ad-small: 4px;
+      --radius-ad: 6px;
+      --radius-card-small: 8px;
+      --radius-card: 12px;
+      --radius-decoration: 16px;
+      --radius-modal: 20px;
+      --radius-pill: 999px;
+
+      /* Measurement - Stroke */
+      --stroke-divider: 1px;
+      --stroke-action: 2px;
+      --stroke-emphasize: 3px;
+
+      /* Typography */
+      --font: 'Reddit Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    }
+
+    /* ===== FONT ===== */
+    @font-face {
+      font-family: 'Reddit Sans';
+      src: url('./Reddit_Sans/RedditSans-VariableFont_wght.ttf') format('truetype');
+      font-weight: 100 900; font-style: normal;
+    }
+    @font-face {
+      font-family: 'Reddit Sans';
+      src: url('./Reddit_Sans/RedditSans-Italic-VariableFont_wght.ttf') format('truetype');
+      font-weight: 100 900; font-style: italic;
+    }
+
+    /* ===== RESET ===== */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: var(--font); background: var(--bg-app); color: var(--text-primary);
+      min-height: 100vh; display: flex;
+    }
+    a { text-decoration: none; color: inherit; }
+    button { font-family: var(--font); cursor: pointer; border: none; background: none; }
+
+    /* ===== SPLIT LAYOUT ===== */
+    .login-page {
+      display: flex; width: 100%; min-height: 100vh;
+    }
+
+    /* Left Panel — Brand Illustration */
+    .brand-panel {
+      flex: 1; background: var(--bg-brand);
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      padding: 48px; position: relative; overflow: hidden;
+    }
+    .brand-panel::before {
+      content: '';
+      position: absolute; top: -80px; right: -80px;
+      width: 320px; height: 320px; border-radius: 50%;
+      background: var(--chotot-75); opacity: 0.5;
+    }
+    .brand-panel::after {
+      content: '';
+      position: absolute; bottom: -60px; left: -60px;
+      width: 240px; height: 240px; border-radius: 50%;
+      background: var(--chotot-300); opacity: 0.3;
+    }
+    .brand-content {
+      position: relative; z-index: 1;
+      display: flex; flex-direction: column; align-items: center;
+      gap: 32px; max-width: 400px; text-align: center;
+    }
+    .brand-logo { width: 160px; height: auto; }
+    .brand-illustration {
+      width: 280px; height: 280px;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .brand-illustration svg { width: 100%; height: 100%; }
+    .brand-tagline {
+      font-size: 24px; font-weight: 700; line-height: 32px;
+      color: var(--text-on-background);
+    }
+    .brand-desc {
+      font-size: 14px; font-weight: 400; line-height: 22px;
+      color: var(--gray-700);
+    }
+
+    /* Right Panel — Form */
+    .form-panel {
+      width: 520px; flex-shrink: 0;
+      background: var(--bg-primary);
+      display: flex; align-items: center; justify-content: center;
+      padding: 48px 56px;
+    }
+    .form-container {
+      width: 100%; max-width: 400px;
+      display: flex; flex-direction: column; gap: var(--gap-20);
+    }
+
+    /* ===== FORM HEADER ===== */
+    .form-header {
+      display: flex; flex-direction: column; gap: var(--gap-8);
+      margin-bottom: 4px;
+    }
+    .form-header .mobile-logo {
+      display: none;
+      width: 100px; height: auto; margin-bottom: var(--gap-8);
+    }
+    .form-title {
+      font-size: 24px; font-weight: 700; line-height: 32px;
+      color: var(--text-primary);
+    }
+    .form-subtitle {
+      font-size: 14px; font-weight: 400; line-height: 20px;
+      color: var(--text-secondary);
+    }
+
+    /* ===== DS INPUT FIELD (48px, radius-card 12px, stroke-action 2px) ===== */
+    .input-group {
+      display: flex; flex-direction: column; gap: var(--gap-4);
+    }
+    .input-field {
+      position: relative; height: 48px;
+      border: var(--stroke-action) solid var(--border-thin);
+      border-radius: var(--radius-card);
+      background: var(--bg-primary);
+      display: flex; align-items: center;
+      padding: var(--pad-2) var(--pad-16);
+      gap: var(--gap-8);
+      transition: border-color 0.15s ease;
+      cursor: text;
+    }
+    .input-field:hover { border-color: var(--border-black); }
+    .input-field:focus-within.has-value { border-color: var(--border-black); }
+    .input-field.error { border-color: var(--border-error); }
+    .input-field.warning { border-color: var(--border-warning); }
+    .input-field.success { border-color: var(--border-thin); }
+    .input-field.disabled {
+      background: var(--bg-secondary); border-color: var(--border-disabled);
+      pointer-events: none;
+    }
+
+    /* Icon Left (24×24) */
+    .input-field .icon-l {
+      width: 24px; height: 24px; flex-shrink: 0;
+      color: var(--icon-secondary); display: flex; align-items: center; justify-content: center;
+    }
+    .input-field .icon-l svg { width: 24px; height: 24px; }
+
+    /* Icon Right (20×20) */
+    .input-field .icon-r {
+      width: 20px; height: 20px; flex-shrink: 0;
+      color: var(--icon-tertiary); display: flex; align-items: center; justify-content: center;
+      cursor: pointer; transition: color 0.15s;
+    }
+    .input-field .icon-r:hover { color: var(--icon-secondary); }
+    .input-field .icon-r svg { width: 20px; height: 20px; }
+
+    /* Text Wrapper */
+    .input-text-wrap {
+      flex: 1; height: 100%;
+      display: flex; flex-direction: column; justify-content: center;
+      overflow: hidden; position: relative;
+    }
+    /* Mode A: Placeholder (fillText=false) */
+    .input-text-wrap input {
+      font-family: var(--font);
+      font-size: 14px; font-weight: 400; line-height: 20px;
+      color: var(--text-primary);
+      border: none; outline: none; background: transparent;
+      width: 100%; padding: 0;
+    }
+    .input-text-wrap input::placeholder {
+      color: var(--text-secondary); font-weight: 400;
+    }
+    /* Mode B: Floating label (fillText=true) */
+    .input-text-wrap .float-label {
+      font-size: 10px; font-weight: 700; line-height: 16px;
+      color: var(--text-primary);
+      opacity: 0; transform: translateY(4px);
+      transition: opacity 0.15s, transform 0.15s;
+      pointer-events: none;
+      white-space: nowrap;
+    }
+    .input-text-wrap .float-label .req { color: var(--text-error); }
+    .input-text-wrap.filled { justify-content: flex-start; padding-top: 5px; }
+    .input-text-wrap.filled .float-label {
+      opacity: 1; transform: translateY(0);
+    }
+    .input-text-wrap.filled input { font-size: 14px; }
+    /* Error state label */
+    .input-field.error .float-label { color: var(--text-error); }
+    .input-field.error .float-label .req { color: var(--text-error); }
+
+    /* Help Text (body-annotation 10px 400) */
+    .help-text {
+      font-size: 10px; font-weight: 400; line-height: 16px;
+      color: var(--text-secondary);
+      padding-left: var(--pad-12);
+    }
+    .help-text.error { color: var(--text-error); }
+    .help-text.warning { color: var(--text-warning); }
+
+    /* ===== DS CHECKBOX (24×24, radius-ad-small 4px, stroke-action 2px) ===== */
+    .options-row {
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .checkbox-wrap {
+      display: flex; align-items: center; gap: var(--gap-8);
+      cursor: pointer; user-select: none;
+    }
+    .checkbox-wrap input[type="checkbox"] {
+      appearance: none; -webkit-appearance: none;
+      width: 24px; height: 24px; flex-shrink: 0;
+      border: var(--stroke-action) solid var(--border-regular);
+      border-radius: var(--radius-ad-small);
+      background: var(--bg-primary); cursor: pointer;
+      position: relative; transition: all 0.15s;
+    }
+    .checkbox-wrap input:hover {
+      border-color: var(--border-black); background: var(--gray-75);
+    }
+    .checkbox-wrap input:checked {
+      background: var(--bg-brand); border-color: var(--bg-brand);
+    }
+    .checkbox-wrap input:checked::after {
+      content: ''; position: absolute;
+      left: 7px; top: 3px; width: 6px; height: 11px;
+      border: solid var(--text-on-background); border-width: 0 2px 2px 0;
+      transform: rotate(45deg);
+    }
+    .checkbox-wrap span {
+      font-size: 14px; font-weight: 400; line-height: 20px;
+      color: var(--text-primary);
+    }
+    .forgot-link {
+      font-size: 14px; font-weight: 500; line-height: 20px;
+      color: var(--text-link); transition: opacity 0.15s;
+    }
+    .forgot-link:hover { opacity: 0.75; }
+
+    /* ===== DS BUTTON — Primary XL (48px, radius-card-small 8px) ===== */
+    .btn-login {
+      display: flex; align-items: center; justify-content: center;
+      gap: var(--gap-4); width: 100%; height: 48px;
+      padding: var(--pad-4) var(--pad-12);
+      background: var(--btn-primary); color: var(--text-on-background);
+      border-radius: var(--radius-card-small);
+      font-size: 14px; font-weight: 700; line-height: 20px;
+      transition: background 0.15s;
+    }
+    .btn-login:hover { background: var(--btn-primary-hover); }
+    .btn-login:active { background: var(--btn-primary-pressed); }
+    .btn-login:disabled {
+      background: var(--btn-disabled); color: var(--gray-0); cursor: not-allowed;
+    }
+    .btn-login .spinner {
+      display: none; width: 20px; height: 20px;
+      border: 2px solid var(--text-on-background);
+      border-top-color: transparent; border-radius: 50%;
+      animation: spin 0.6s linear infinite;
+    }
+    .btn-login.loading .spinner { display: inline-block; }
+    .btn-login.loading .btn-label { display: none; }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    /* ===== DIVIDER ===== */
+    .divider-row {
+      display: flex; align-items: center; gap: var(--gap-12);
+    }
+    .divider-row::before, .divider-row::after {
+      content: ''; flex: 1; height: 1px; background: var(--border-thin);
+    }
+    .divider-row span {
+      font-size: 12px; font-weight: 400; line-height: 18px;
+      color: var(--text-tertiary); white-space: nowrap;
+    }
+
+    /* ===== SOCIAL BUTTONS (DS Tertiary, 48px) ===== */
+    .social-row {
+      display: flex; gap: var(--gap-12);
+    }
+    .btn-social {
+      flex: 1; display: flex; align-items: center; justify-content: center;
+      gap: var(--gap-8); height: 48px;
+      border: var(--stroke-divider) solid var(--border-regular);
+      border-radius: var(--radius-card-small);
+      background: var(--bg-primary);
+      font-size: 14px; font-weight: 700; line-height: 20px;
+      color: var(--text-primary);
+      transition: background 0.15s, border-color 0.15s;
+    }
+    .btn-social:hover { background: var(--bg-secondary); border-color: var(--gray-200); }
+    .btn-social:active { background: var(--bg-tertiary); }
+    .btn-social svg { width: 20px; height: 20px; flex-shrink: 0; }
+
+    /* ===== FOOTER ===== */
+    .form-footer {
+      text-align: center;
+      font-size: 14px; font-weight: 400; line-height: 20px;
+      color: var(--text-secondary);
+    }
+    .form-footer a {
+      color: var(--text-link); font-weight: 700;
+    }
+    .form-footer a:hover { text-decoration: underline; }
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 960px) {
+      .brand-panel { display: none; }
+      .form-panel {
+        width: 100%; padding: 32px 24px;
+      }
+      .form-header .mobile-logo { display: block; }
+    }
+    @media (max-width: 480px) {
+      .form-panel { padding: 24px 20px; }
+      .form-container { max-width: 100%; }
+      .social-row { flex-direction: column; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="login-page">
+
+    <!-- ===== LEFT — Brand Panel ===== -->
+    <div class="brand-panel">
+      <div class="brand-content">
+        <img class="brand-logo" src="./logo/chotot-lgo.png" alt="Chợ Tốt"
+             onerror="this.outerHTML='<div style=&quot;font-size:36px;font-weight:800;color:#222;&quot;>chợ<span style=&quot;color:#ffba00&quot;>TỐT</span></div>'">
+
+        <!-- Illustration SVG -->
+        <div class="brand-illustration">
+          <svg viewBox="0 0 280 280" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <!-- Phone frame -->
+            <rect x="80" y="30" width="120" height="210" rx="20" fill="#ffffff" stroke="#222222" stroke-width="3"/>
+            <rect x="90" y="50" width="100" height="170" rx="4" fill="#f7f7f7"/>
+            <!-- Notch -->
+            <rect x="118" y="36" width="44" height="6" rx="3" fill="#e8e8e8"/>
+            <!-- Screen content cards -->
+            <rect x="98" y="62" width="84" height="24" rx="6" fill="#ffd400"/>
+            <rect x="98" y="94" width="84" height="40" rx="6" fill="#ffffff" stroke="#e8e8e8" stroke-width="1.5"/>
+            <rect x="106" y="102" width="40" height="6" rx="3" fill="#e8e8e8"/>
+            <rect x="106" y="114" width="60" height="6" rx="3" fill="#dddddd"/>
+            <rect x="106" y="126" width="20" height="6" rx="3" fill="#f0325e"/>
+            <rect x="98" y="142" width="84" height="40" rx="6" fill="#ffffff" stroke="#e8e8e8" stroke-width="1.5"/>
+            <rect x="106" y="150" width="40" height="6" rx="3" fill="#e8e8e8"/>
+            <rect x="106" y="162" width="60" height="6" rx="3" fill="#dddddd"/>
+            <rect x="106" y="174" width="30" height="6" rx="3" fill="#12a154"/>
+            <rect x="98" y="190" width="84" height="24" rx="6" fill="#222222"/>
+            <rect x="118" y="198" width="44" height="8" rx="4" fill="#ffffff"/>
+            <!-- Home button -->
+            <circle cx="140" cy="232" r="4" fill="#e8e8e8"/>
+            <!-- Decorative elements -->
+            <circle cx="54" cy="80" r="20" fill="#ffe884" opacity="0.6"/>
+            <circle cx="230" cy="200" r="16" fill="#ffba00" opacity="0.4"/>
+            <rect x="44" y="170" width="24" height="24" rx="6" fill="#fff8d6" stroke="#ffd400" stroke-width="1.5"/>
+            <path d="M52 178l4 4 8-8" stroke="#ffd400" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            <rect x="216" y="80" width="28" height="28" rx="14" fill="#fff8d6" stroke="#ffd400" stroke-width="1.5"/>
+            <path d="M226 90l2 4 6-6" stroke="#cc8f00" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+
+        <div>
+          <p class="brand-tagline">Mua bán nhanh, tin cậy</p>
+          <p class="brand-desc" style="margin-top:8px;">Nền tảng mua bán hàng đầu Việt Nam với hàng triệu tin đăng mỗi ngày.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== RIGHT — Login Form ===== -->
+    <div class="form-panel">
+      <div class="form-container">
+
+        <!-- Header -->
+        <div class="form-header">
+          <img class="mobile-logo" src="./logo/chotot-lgo.png" alt="Chợ Tốt"
+               onerror="this.outerHTML='<div style=&quot;font-size:24px;font-weight:800;color:#222;margin-bottom:8px;&quot;>chợ<span style=&quot;color:#ffba00&quot;>TỐT</span></div>'">
+          <h1 class="form-title">Đăng nhập</h1>
+          <p class="form-subtitle">Chào mừng bạn quay lại! Vui lòng đăng nhập để tiếp tục.</p>
+        </div>
+
+        <!-- Email / Phone -->
+        <div class="input-group" id="emailGroup">
+          <div class="input-field" id="emailField" onclick="this.querySelector('input').focus()">
+            <div class="icon-l">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="2" y="4" width="20" height="16" rx="2"/>
+                <path d="M22 4L12 13 2 4"/>
+              </svg>
+            </div>
+            <div class="input-text-wrap" id="emailWrap">
+              <span class="float-label">Email hoặc Số điện thoại <span class="req">*</span></span>
+              <input type="text" id="emailInput" placeholder="Email hoặc Số điện thoại *" autocomplete="username">
+            </div>
+          </div>
+          <div class="help-text" id="emailHelp" style="display:none;"></div>
+        </div>
+
+        <!-- Password -->
+        <div class="input-group" id="passwordGroup">
+          <div class="input-field" id="passwordField" onclick="this.querySelector('input').focus()">
+            <div class="icon-l">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
+                <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+              </svg>
+            </div>
+            <div class="input-text-wrap" id="passwordWrap">
+              <span class="float-label">Mật khẩu <span class="req">*</span></span>
+              <input type="password" id="passwordInput" placeholder="Mật khẩu *" autocomplete="current-password">
+            </div>
+            <div class="icon-r" id="togglePass" tabindex="0" role="button" aria-label="Hiện mật khẩu">
+              <svg id="eyeIcon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8S1 12 1 12z"/>
+                <circle cx="12" cy="12" r="3"/>
+              </svg>
+            </div>
+          </div>
+          <div class="help-text" id="passwordHelp" style="display:none;"></div>
+        </div>
+
+        <!-- Remember + Forgot -->
+        <div class="options-row">
+          <label class="checkbox-wrap">
+            <input type="checkbox" id="rememberMe">
+            <span>Ghi nhớ đăng nhập</span>
+          </label>
+          <a href="#" class="forgot-link">Quên mật khẩu?</a>
+        </div>
+
+        <!-- Login Button -->
+        <button class="btn-login" id="loginBtn" type="button">
+          <span class="btn-label">Đăng nhập</span>
+          <span class="spinner"></span>
+        </button>
+
+        <!-- Divider -->
+        <div class="divider-row"><span>hoặc đăng nhập bằng</span></div>
+
+        <!-- Social Login -->
+        <div class="social-row">
+          <button class="btn-social" data-provider="Google">
+            <svg viewBox="0 0 24 24">
+              <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92a5.06 5.06 0 01-2.2 3.32v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.1z" fill="#4285F4"/>
+              <path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/>
+              <path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18A10.96 10.96 0 001 12c0 1.77.42 3.44 1.18 4.93l3.66-2.84z" fill="#FBBC05"/>
+              <path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/>
+            </svg>
+            Google
+          </button>
+          <button class="btn-social" data-provider="Facebook">
+            <svg viewBox="0 0 24 24" fill="#1877F2">
+              <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+            </svg>
+            Facebook
+          </button>
+          <button class="btn-social" data-provider="Apple">
+            <svg viewBox="0 0 24 24" fill="#000000">
+              <path d="M17.05 20.28c-.98.95-2.05.88-3.08.4-1.09-.5-2.08-.48-3.24 0-1.44.62-2.2.44-3.06-.4C2.79 15.25 3.51 7.59 9.05 7.31c1.35.07 2.29.74 3.08.8 1.18-.24 2.31-.93 3.57-.84 1.51.12 2.65.72 3.4 1.8-3.12 1.87-2.38 5.98.48 7.13-.57 1.5-1.31 2.99-2.54 4.09zM12.03 7.25c-.15-2.23 1.66-4.07 3.74-4.25.29 2.58-2.34 4.5-3.74 4.25z"/>
+            </svg>
+            Apple
+          </button>
+        </div>
+
+        <!-- Footer -->
+        <div class="form-footer">
+          Chưa có tài khoản? <a href="#">Đăng ký ngay</a>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+
+  <script>
+    /* ===== Floating Label Logic (DS Input Field behavior) ===== */
+    function initInputField(inputId, wrapId, fieldId, helpId) {
+      const input = document.getElementById(inputId);
+      const wrap = document.getElementById(wrapId);
+      const field = document.getElementById(fieldId);
+
+      function update() {
+        const hasVal = input.value.length > 0;
+        wrap.classList.toggle('filled', hasVal);
+        field.classList.toggle('has-value', hasVal);
+        if (hasVal) {
+          input.placeholder = '';
+        } else {
+          // Restore placeholder from float-label content
+          const label = wrap.querySelector('.float-label');
+          if (label) input.placeholder = label.textContent.trim();
+        }
+        // Clear error on typing
+        if (hasVal) {
+          field.classList.remove('error');
+          const helpEl = document.getElementById(helpId);
+          if (helpEl) { helpEl.style.display = 'none'; helpEl.textContent = ''; }
+        }
+      }
+
+      input.addEventListener('input', update);
+      input.addEventListener('focus', update);
+      input.addEventListener('blur', update);
+    }
+
+    initInputField('emailInput', 'emailWrap', 'emailField', 'emailHelp');
+    initInputField('passwordInput', 'passwordWrap', 'passwordField', 'passwordHelp');
+
+    /* ===== Toggle Password Visibility ===== */
+    const togglePass = document.getElementById('togglePass');
+    const passInput = document.getElementById('passwordInput');
+    const eyeIcon = document.getElementById('eyeIcon');
+    let passVisible = false;
+
+    togglePass.addEventListener('click', () => {
+      passVisible = !passVisible;
+      passInput.type = passVisible ? 'text' : 'password';
+      togglePass.setAttribute('aria-label', passVisible ? 'Ẩn mật khẩu' : 'Hiện mật khẩu');
+      eyeIcon.innerHTML = passVisible
+        ? '<path d="M17.94 17.94A10.07 10.07 0 0112 20c-7 0-11-8-11-8a18.45 18.45 0 015.06-5.94M9.9 4.24A9.12 9.12 0 0112 4c7 0 11 8 11 8a18.5 18.5 0 01-2.16 3.19m-6.72-1.07a3 3 0 11-4.24-4.24" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" fill="none"/><line x1="1" y1="1" x2="23" y2="23" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>'
+        : '<path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8S1 12 1 12z" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" fill="none"/><circle cx="12" cy="12" r="3" stroke="currentColor" stroke-width="1.8" fill="none"/>';
+    });
+    togglePass.addEventListener('keydown', (e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); togglePass.click(); } });
+
+    /* ===== Validation & Login ===== */
+    function showError(fieldId, helpId, message) {
+      const field = document.getElementById(fieldId);
+      const help = document.getElementById(helpId);
+      field.classList.add('error');
+      help.textContent = message;
+      help.className = 'help-text error';
+      help.style.display = 'block';
+    }
+
+    function clearErrors() {
+      ['emailField', 'passwordField'].forEach(id => document.getElementById(id).classList.remove('error'));
+      ['emailHelp', 'passwordHelp'].forEach(id => {
+        const el = document.getElementById(id);
+        el.style.display = 'none'; el.textContent = '';
+      });
+    }
+
+    document.getElementById('loginBtn').addEventListener('click', () => {
+      const email = document.getElementById('emailInput').value.trim();
+      const password = document.getElementById('passwordInput').value.trim();
+      const btn = document.getElementById('loginBtn');
+
+      clearErrors();
+      let valid = true;
+
+      if (!email) { showError('emailField', 'emailHelp', 'Vui lòng nhập email hoặc số điện thoại.'); valid = false; }
+      if (!password) { showError('passwordField', 'passwordHelp', 'Vui lòng nhập mật khẩu.'); valid = false; }
+      if (password && password.length < 6) { showError('passwordField', 'passwordHelp', 'Mật khẩu phải có ít nhất 6 ký tự.'); valid = false; }
+
+      if (valid) {
+        btn.classList.add('loading'); btn.disabled = true;
+        setTimeout(() => {
+          btn.classList.remove('loading'); btn.disabled = false;
+          alert('Đăng nhập thành công! (Demo)');
+        }, 1500);
+      }
+    });
+
+    /* ===== Social Login ===== */
+    document.querySelectorAll('.btn-social').forEach(btn => {
+      btn.addEventListener('click', () => {
+        alert('Đăng nhập bằng ' + btn.dataset.provider + ' (Demo)');
+      });
+    });
+
+    /* ===== Enter Key ===== */
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' && !e.target.closest('.btn-social')) {
+        document.getElementById('loginBtn').click();
+      }
+    });
+  </script>
+
+</body>
+</html>

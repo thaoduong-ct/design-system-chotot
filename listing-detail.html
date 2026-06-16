@@ -1,0 +1,917 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chi tiết tin đăng - Chợ Tốt</title>
+  <style>
+    /* ===== CHOTOT DS TOKENS ===== */
+    :root {
+      /* Color Primitives */
+      --gray-0: #ffffff;
+      --gray-25: #f7f7f7;
+      --gray-50: #f4f4f4;
+      --gray-75: #e8e8e8;
+      --gray-100: #dddddd;
+      --gray-200: #c0c0c0;
+      --gray-300: #a7a7a7;
+      --gray-400: #8c8c8c;
+      --gray-500: #737373;
+      --gray-600: #595959;
+      --gray-700: #404040;
+      --gray-800: #2e2e2e;
+      --gray-900: #222222;
+
+      --red-500: #f0325e;
+      --green-400: #12a154;
+      --green-50: #ecf9f1;
+      --orange-300: #fb7328;
+      --blue-500: #306bd9;
+
+      /* Brand */
+      --chotot-50: #fff8d6;
+      --chotot-75: #ffe884;
+      --chotot-100: #ffd400;
+      --chotot-300: #ffba00;
+      --chotot-400: #cc8f00;
+
+      /* Semantic - Background */
+      --bg-primary: #ffffff;
+      --bg-app: #f7f7f7;
+      --bg-secondary: #f4f4f4;
+      --bg-tertiary: #e8e8e8;
+      --bg-brand: #ffd400;
+      --bg-brand-light: #fff8d6;
+      --bg-success-light: #ecf9f1;
+      --bg-inverted: #222222;
+      --bg-overlay: rgba(34,34,34,0.50);
+
+      /* Semantic - Border */
+      --border-divider: #f4f4f4;
+      --border-thin: #e8e8e8;
+      --border-regular: #dddddd;
+      --border-bold: #8c8c8c;
+      --border-brand: #ffd400;
+      --border-black: #222222;
+
+      /* Semantic - Text */
+      --text-primary: #222222;
+      --text-secondary: #595959;
+      --text-tertiary: #8c8c8c;
+      --text-brand: #cc8f00;
+      --text-link: #306bd9;
+      --text-success: #12a154;
+      --text-error: #f0325e;
+      --text-blank: #ffffff;
+      --text-on-background: #222222;
+
+      /* Semantic - Icon */
+      --icon-primary: #222222;
+      --icon-secondary: #595959;
+      --icon-tertiary: #8c8c8c;
+      --icon-brand: #ffba00;
+      --icon-error: #f0325e;
+
+      /* Semantic - Button */
+      --btn-primary: #ffd400;
+      --btn-primary-hover: #ffe884;
+      --btn-primary-pressed: #ffba00;
+      --btn-neutral: #222222;
+      --btn-neutral-hover: #595959;
+      --btn-tonal-neutral: #f4f4f4;
+      --btn-disabled: #c0c0c0;
+
+      /* Measurement - Spacing */
+      --gap-2: 2px;
+      --gap-4: 4px;
+      --gap-6: 6px;
+      --gap-8: 8px;
+      --gap-12: 12px;
+      --gap-16: 16px;
+      --gap-20: 20px;
+
+      /* Measurement - Padding */
+      --pad-2: 2px;
+      --pad-4: 4px;
+      --pad-6: 6px;
+      --pad-8: 8px;
+      --pad-12: 12px;
+      --pad-16: 16px;
+      --pad-20: 20px;
+
+      /* Measurement - Radius */
+      --radius-ad-small: 4px;
+      --radius-ad: 6px;
+      --radius-card-small: 8px;
+      --radius-card: 12px;
+      --radius-decoration: 16px;
+      --radius-modal: 20px;
+      --radius-pill: 999px;
+
+      /* Measurement - Stroke */
+      --stroke-divider: 1px;
+      --stroke-action: 2px;
+
+      /* Typography */
+      --font: 'Reddit Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    }
+
+    /* ===== FONT ===== */
+    @font-face {
+      font-family: 'Reddit Sans';
+      src: url('./Reddit_Sans/RedditSans-VariableFont_wght.ttf') format('truetype');
+      font-weight: 100 900; font-style: normal;
+    }
+    @font-face {
+      font-family: 'Reddit Sans';
+      src: url('./Reddit_Sans/RedditSans-Italic-VariableFont_wght.ttf') format('truetype');
+      font-weight: 100 900; font-style: italic;
+    }
+
+    /* ===== RESET ===== */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: var(--font); background: var(--bg-app); color: var(--text-primary); }
+    a { text-decoration: none; color: inherit; }
+    img { display: block; max-width: 100%; }
+    button { font-family: var(--font); cursor: pointer; border: none; background: none; }
+
+    /* ===== TYPOGRAPHY CLASSES (DS) ===== */
+    .display-page    { font-size: 32px; font-weight: 700; line-height: 40px; }
+    .display-section { font-size: 24px; font-weight: 700; line-height: 32px; }
+    .display-caption { font-size: 20px; font-weight: 700; line-height: 28px; }
+    .heading-section { font-size: 16px; font-weight: 700; line-height: 20px; }
+    .heading-caption { font-size: 14px; font-weight: 700; line-height: 20px; }
+    .body-section    { font-size: 16px; font-weight: 400; line-height: 24px; }
+    .body-caption    { font-size: 14px; font-weight: 400; line-height: 20px; }
+    .body-annotation { font-size: 12px; font-weight: 400; line-height: 18px; }
+    .tagline-section { font-size: 16px; font-weight: 500; line-height: 20px; }
+    .tagline-caption { font-size: 14px; font-weight: 500; line-height: 20px; }
+    .tagline-annotation { font-size: 12px; font-weight: 500; line-height: 18px; }
+    .label-section   { font-size: 14px; font-weight: 700; line-height: 20px; }
+    .label-annotation{ font-size: 10px; font-weight: 700; line-height: 16px; }
+
+    /* ===== NAV BAR (DS Navigation Desktop - Uni/Scrolling) ===== */
+    .topnav {
+      width: 100%; height: 64px; background: var(--bg-primary);
+      border-bottom: var(--stroke-divider) solid var(--border-divider);
+      display: flex; align-items: center; padding: 0 var(--pad-16); gap: var(--gap-8);
+      position: sticky; top: 0; z-index: 100;
+    }
+    .topnav-logo { display: flex; align-items: center; gap: var(--gap-8); flex-shrink: 0; }
+    .topnav-logo img { height: 32px; }
+    .topnav-search {
+      flex: 1; display: flex; align-items: center; gap: var(--gap-8);
+      max-width: 640px; margin: 0 auto;
+    }
+    .location-pill {
+      display: flex; align-items: center; gap: var(--gap-4);
+      background: var(--bg-secondary); border: var(--stroke-action) solid var(--border-brand);
+      border-radius: var(--radius-pill); padding: 0 var(--pad-12); height: 40px;
+      white-space: nowrap; cursor: pointer;
+    }
+    .location-pill:hover { background: var(--chotot-50); }
+    .search-bar {
+      flex: 1; display: flex; align-items: center; gap: var(--gap-8);
+      background: var(--bg-secondary); border-radius: var(--radius-pill);
+      padding: 0 var(--pad-16); height: 40px;
+    }
+    .search-bar input {
+      flex: 1; border: none; background: transparent; outline: none;
+      font-family: var(--font); font-size: 14px; color: var(--text-primary);
+    }
+    .search-bar input::placeholder { color: var(--text-tertiary); }
+    .topnav-actions { display: flex; align-items: center; gap: var(--gap-4); flex-shrink: 0; }
+
+    /* Icon Button (DS) */
+    .icon-btn {
+      width: 40px; height: 40px; display: flex; align-items: center; justify-content: center;
+      border-radius: var(--radius-card-small); color: var(--icon-primary); transition: background 0.15s;
+    }
+    .icon-btn:hover { background: var(--bg-secondary); }
+    .icon-btn svg { width: 20px; height: 20px; }
+
+    /* DS Button - Primary */
+    .btn-primary {
+      display: inline-flex; align-items: center; justify-content: center; gap: var(--gap-4);
+      height: 40px; padding: var(--pad-4) var(--pad-12);
+      background: var(--btn-primary); color: var(--text-on-background);
+      border-radius: var(--radius-card-small);
+      font-size: 14px; font-weight: 700; line-height: 20px;
+      transition: background 0.15s;
+    }
+    .btn-primary:hover { background: var(--btn-primary-hover); }
+    .btn-primary:active { background: var(--btn-primary-pressed); }
+
+    /* DS Button - Black Primary */
+    .btn-black {
+      display: inline-flex; align-items: center; justify-content: center; gap: var(--gap-4);
+      height: 48px; padding: var(--pad-4) var(--pad-12);
+      background: var(--btn-neutral); color: var(--text-blank);
+      border-radius: var(--radius-card-small);
+      font-size: 14px; font-weight: 700; line-height: 20px;
+      width: 100%; transition: background 0.15s;
+    }
+    .btn-black:hover { background: var(--btn-neutral-hover); }
+
+    /* DS Button - Secondary */
+    .btn-secondary {
+      display: inline-flex; align-items: center; justify-content: center; gap: var(--gap-4);
+      height: 48px; padding: var(--pad-4) var(--pad-12);
+      background: var(--btn-tonal-neutral); color: var(--text-primary);
+      border-radius: var(--radius-card-small);
+      font-size: 14px; font-weight: 700; line-height: 20px;
+      width: 100%; transition: background 0.15s;
+    }
+    .btn-secondary:hover { background: var(--bg-tertiary); }
+
+    /* DS Button - Tertiary */
+    .btn-tertiary {
+      display: inline-flex; align-items: center; justify-content: center; gap: var(--gap-4);
+      height: 40px; padding: var(--pad-4) var(--pad-12);
+      background: var(--bg-primary); color: var(--text-primary);
+      border: var(--stroke-divider) solid var(--border-regular);
+      border-radius: var(--radius-card-small);
+      font-size: 14px; font-weight: 700; line-height: 20px;
+      transition: background 0.15s;
+    }
+    .btn-tertiary:hover { background: var(--bg-secondary); }
+
+    /* DS Button - Ghost */
+    .btn-ghost {
+      display: inline-flex; align-items: center; justify-content: center; gap: var(--gap-4);
+      height: 40px; padding: var(--pad-4) var(--pad-12);
+      background: transparent; color: var(--text-primary);
+      border-radius: var(--radius-card-small);
+      font-size: 14px; font-weight: 700; line-height: 20px;
+      transition: background 0.15s;
+    }
+    .btn-ghost:hover { background: var(--bg-secondary); }
+
+    /* DS Avatar */
+    .avatar {
+      width: 72px; height: 72px; border-radius: 50%; object-fit: cover;
+      background: var(--bg-secondary);
+    }
+    .avatar-sm { width: 40px; height: 40px; }
+    .avatar-xs { width: 32px; height: 32px; }
+
+    /* DS Chip - Fill */
+    .chip {
+      display: inline-flex; align-items: center; gap: var(--gap-4);
+      height: 32px; padding: var(--pad-4) var(--pad-12);
+      background: var(--bg-secondary); color: var(--text-primary);
+      border-radius: var(--radius-pill);
+      font-size: 14px; font-weight: 500; line-height: 20px;
+      cursor: pointer; transition: background 0.15s;
+    }
+    .chip:hover { background: var(--bg-tertiary); }
+    .chip.selected {
+      background: var(--bg-inverted); color: var(--text-blank);
+    }
+    .chip svg { width: 20px; height: 20px; }
+
+    /* ===== PAGE LAYOUT ===== */
+    .page-container {
+      max-width: 1200px; margin: 0 auto; padding: var(--pad-16);
+      display: grid;
+      grid-template-columns: 1fr 380px;
+      gap: var(--gap-20);
+      align-items: start;
+    }
+
+    /* ===== BREADCRUMBS (DS) ===== */
+    .breadcrumbs {
+      grid-column: 1 / -1;
+      display: flex; align-items: center; gap: var(--gap-8); flex-wrap: wrap;
+      padding: var(--pad-8) 0;
+    }
+    .breadcrumbs a {
+      font-size: 12px; font-weight: 400; line-height: 18px;
+      color: var(--text-tertiary); transition: color 0.15s;
+    }
+    .breadcrumbs a:hover { color: var(--text-primary); text-decoration: underline; }
+    .breadcrumbs .sep { font-size: 12px; color: var(--text-tertiary); }
+    .breadcrumbs .current { font-size: 12px; font-weight: 400; color: var(--text-primary); }
+
+    /* ===== LEFT COLUMN ===== */
+    .left-col { display: flex; flex-direction: column; gap: var(--gap-16); }
+
+    /* Image Gallery */
+    .gallery {
+      position: relative; border-radius: var(--radius-card);
+      overflow: hidden; background: var(--gray-900);
+      aspect-ratio: 4 / 3;
+    }
+    .gallery-main-img {
+      width: 100%; height: 100%; object-fit: cover;
+    }
+    .gallery-counter {
+      position: absolute; bottom: 12px; right: 12px;
+      background: rgba(34,34,34,0.50); color: var(--text-blank);
+      padding: 4px 12px; border-radius: var(--radius-pill);
+      font-size: 12px; font-weight: 500; line-height: 18px;
+      display: flex; align-items: center; gap: var(--gap-4);
+    }
+    .gallery-counter svg { width: 16px; height: 16px; }
+    .gallery-nav {
+      position: absolute; top: 50%; transform: translateY(-50%);
+      width: 40px; height: 40px; border-radius: 50%;
+      background: rgba(255,255,255,0.75); color: var(--icon-primary);
+      display: flex; align-items: center; justify-content: center;
+      transition: background 0.15s; cursor: pointer; border: none;
+    }
+    .gallery-nav:hover { background: var(--bg-primary); }
+    .gallery-nav.prev { left: 12px; }
+    .gallery-nav.next { right: 12px; }
+    .gallery-nav svg { width: 20px; height: 20px; }
+    .gallery-thumbs {
+      display: flex; gap: var(--gap-8); margin-top: var(--gap-8);
+    }
+    .gallery-thumb {
+      width: 72px; height: 54px; border-radius: var(--radius-ad);
+      overflow: hidden; cursor: pointer; border: var(--stroke-action) solid transparent;
+      opacity: 0.6; transition: all 0.15s;
+    }
+    .gallery-thumb.active { border-color: var(--border-brand); opacity: 1; }
+    .gallery-thumb:hover { opacity: 1; }
+    .gallery-thumb img { width: 100%; height: 100%; object-fit: cover; }
+
+    /* ===== CONTENT SECTIONS (Cards) ===== */
+    .card {
+      background: var(--bg-primary); border-radius: var(--radius-card);
+      padding: var(--pad-20); display: flex; flex-direction: column; gap: var(--gap-16);
+      border: var(--stroke-divider) solid var(--border-divider);
+    }
+
+    /* Price Section */
+    .price-row {
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .price-value {
+      font-size: 24px; font-weight: 700; line-height: 32px;
+      color: var(--text-error);
+    }
+    .price-actions { display: flex; align-items: center; gap: var(--gap-4); }
+
+    /* Title */
+    .listing-title {
+      font-size: 20px; font-weight: 700; line-height: 28px;
+      color: var(--text-primary);
+    }
+
+    /* Meta chips */
+    .meta-row {
+      display: flex; align-items: center; gap: var(--gap-8); flex-wrap: wrap;
+    }
+    .meta-item {
+      display: flex; align-items: center; gap: var(--gap-4);
+      font-size: 12px; font-weight: 400; line-height: 18px;
+      color: var(--text-secondary);
+    }
+    .meta-item svg { width: 16px; height: 16px; color: var(--icon-tertiary); }
+
+    /* Divider */
+    .divider {
+      width: 100%; height: 1px; background: var(--border-divider);
+    }
+
+    /* Specs Table */
+    .specs-table {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 0; border-radius: var(--radius-card-small); overflow: hidden;
+    }
+    .spec-row {
+      display: flex; flex-direction: column; gap: var(--gap-2);
+      padding: var(--pad-12) var(--pad-16);
+      border-bottom: var(--stroke-divider) solid var(--border-divider);
+    }
+    .spec-row:nth-child(odd) { border-right: var(--stroke-divider) solid var(--border-divider); }
+    .spec-label {
+      font-size: 12px; font-weight: 400; line-height: 18px;
+      color: var(--text-tertiary);
+    }
+    .spec-value {
+      font-size: 14px; font-weight: 500; line-height: 20px;
+      color: var(--text-primary);
+    }
+
+    /* Description */
+    .description-text {
+      font-size: 14px; font-weight: 400; line-height: 22px;
+      color: var(--text-primary); white-space: pre-line;
+    }
+    .read-more {
+      font-size: 14px; font-weight: 700; color: var(--text-link);
+      cursor: pointer; background: none; border: none; padding: 0;
+      font-family: var(--font);
+    }
+    .read-more:hover { text-decoration: underline; }
+
+    /* Map */
+    .map-placeholder {
+      width: 100%; height: 200px; border-radius: var(--radius-card-small);
+      background: var(--bg-secondary); display: flex; align-items: center; justify-content: center;
+      color: var(--text-tertiary); font-size: 14px; gap: var(--gap-8);
+    }
+
+    /* ===== RIGHT COLUMN (Sidebar) ===== */
+    .right-col { display: flex; flex-direction: column; gap: var(--gap-16); position: sticky; top: 80px; }
+
+    /* Seller Card */
+    .seller-card {
+      background: var(--bg-primary); border-radius: var(--radius-card);
+      padding: var(--pad-20); display: flex; flex-direction: column; gap: var(--gap-16);
+      border: var(--stroke-divider) solid var(--border-divider);
+    }
+    .seller-header { display: flex; align-items: center; gap: var(--gap-12); }
+    .seller-avatar {
+      width: 72px; height: 72px; border-radius: 50%; object-fit: cover;
+      background: var(--bg-tertiary); flex-shrink: 0;
+    }
+    .seller-info { display: flex; flex-direction: column; gap: var(--gap-4); flex: 1; }
+    .seller-name {
+      font-size: 16px; font-weight: 700; line-height: 20px;
+      color: var(--text-primary); display: flex; align-items: center; gap: var(--gap-4);
+    }
+    .badge-pro {
+      display: inline-flex; align-items: center; gap: var(--gap-2);
+      background: var(--bg-brand); color: var(--text-on-background);
+      padding: 2px 8px; border-radius: var(--radius-pill);
+      font-size: 10px; font-weight: 700; line-height: 16px;
+    }
+    .seller-stats {
+      display: flex; align-items: center; gap: var(--gap-12);
+      font-size: 12px; font-weight: 400; line-height: 18px;
+      color: var(--text-secondary);
+    }
+    .seller-stats .dot { width: 3px; height: 3px; border-radius: 50%; background: var(--gray-300); }
+    .seller-response {
+      display: flex; align-items: center; gap: var(--gap-4);
+      font-size: 12px; font-weight: 400; line-height: 18px;
+      color: var(--text-success);
+    }
+    .seller-response svg { width: 16px; height: 16px; }
+
+    .seller-actions { display: flex; flex-direction: column; gap: var(--gap-8); }
+
+    .phone-btn {
+      display: flex; align-items: center; justify-content: center; gap: var(--gap-8);
+      height: 48px; background: var(--btn-primary); color: var(--text-on-background);
+      border-radius: var(--radius-card-small); width: 100%;
+      font-size: 14px; font-weight: 700; line-height: 20px;
+      transition: background 0.15s;
+    }
+    .phone-btn:hover { background: var(--btn-primary-hover); }
+    .phone-btn svg { width: 20px; height: 20px; }
+
+    .chat-btn {
+      display: flex; align-items: center; justify-content: center; gap: var(--gap-8);
+      height: 48px; background: var(--bg-primary); color: var(--text-primary);
+      border: var(--stroke-divider) solid var(--border-regular);
+      border-radius: var(--radius-card-small); width: 100%;
+      font-size: 14px; font-weight: 700; line-height: 20px;
+      transition: background 0.15s;
+    }
+    .chat-btn:hover { background: var(--bg-secondary); }
+    .chat-btn svg { width: 20px; height: 20px; }
+
+    .view-profile-link {
+      text-align: center; font-size: 14px; font-weight: 700;
+      color: var(--text-link); cursor: pointer;
+    }
+    .view-profile-link:hover { text-decoration: underline; }
+
+    /* Safety Tips Card */
+    .safety-card {
+      background: var(--bg-brand-light); border-radius: var(--radius-card);
+      padding: var(--pad-16); display: flex; flex-direction: column; gap: var(--gap-12);
+      border: var(--stroke-divider) solid var(--chotot-75);
+    }
+    .safety-header {
+      display: flex; align-items: center; gap: var(--gap-8);
+      font-size: 14px; font-weight: 700; line-height: 20px;
+      color: var(--text-brand);
+    }
+    .safety-header svg { width: 20px; height: 20px; color: var(--icon-brand); }
+    .safety-list {
+      display: flex; flex-direction: column; gap: var(--gap-8);
+    }
+    .safety-item {
+      display: flex; align-items: flex-start; gap: var(--gap-8);
+      font-size: 12px; font-weight: 400; line-height: 18px;
+      color: var(--text-secondary);
+    }
+    .safety-item svg { width: 16px; height: 16px; flex-shrink: 0; margin-top: 1px; color: var(--text-success); }
+
+    /* Related Listings */
+    .related-section { grid-column: 1 / -1; }
+    .related-section h2 { margin-bottom: var(--gap-16); }
+    .related-grid {
+      display: grid; grid-template-columns: repeat(4, 1fr); gap: var(--gap-16);
+    }
+    .related-card {
+      background: var(--bg-primary); border-radius: var(--radius-card);
+      overflow: hidden; border: var(--stroke-divider) solid var(--border-divider);
+      transition: box-shadow 0.15s; cursor: pointer;
+    }
+    .related-card:hover { box-shadow: 0 4px 16px rgba(34,34,34,0.12); }
+    .related-img {
+      width: 100%; aspect-ratio: 4/3; object-fit: cover;
+      background: var(--bg-secondary);
+    }
+    .related-body { padding: var(--pad-12); display: flex; flex-direction: column; gap: var(--gap-4); }
+    .related-title {
+      font-size: 14px; font-weight: 500; line-height: 20px;
+      color: var(--text-primary);
+      display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;
+    }
+    .related-price {
+      font-size: 16px; font-weight: 700; line-height: 20px;
+      color: var(--text-error);
+    }
+    .related-meta {
+      display: flex; align-items: center; gap: var(--gap-4);
+      font-size: 12px; color: var(--text-tertiary);
+    }
+    .related-meta .dot { width: 3px; height: 3px; border-radius: 50%; background: var(--gray-300); }
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 960px) {
+      .page-container { grid-template-columns: 1fr; }
+      .right-col { position: static; }
+      .related-grid { grid-template-columns: repeat(2, 1fr); }
+      .topnav-search { display: none; }
+    }
+    @media (max-width: 600px) {
+      .page-container { padding: var(--pad-8); gap: var(--gap-12); }
+      .related-grid { grid-template-columns: 1fr 1fr; }
+      .specs-table { grid-template-columns: 1fr; }
+      .specs-table .spec-row:nth-child(odd) { border-right: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ===== TOP NAVIGATION (DS Navigation Desktop - Uni/Scrolling) ===== -->
+  <nav class="topnav">
+    <div class="topnav-logo">
+      <button class="icon-btn" aria-label="Menu">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+      </button>
+      <a href="#"><img src="./logo/chotot-lgo.png" alt="Chợ Tốt" style="height:28px;"></a>
+    </div>
+
+    <div class="topnav-search">
+      <div class="location-pill">
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M10 1.667A5.838 5.838 0 004.167 7.5C4.167 12.083 10 18.333 10 18.333s5.833-6.25 5.833-10.833A5.838 5.838 0 0010 1.667zm0 7.916a2.083 2.083 0 110-4.166 2.083 2.083 0 010 4.166z" fill="var(--icon-brand)"/></svg>
+        <span class="tagline-caption">Tp Hồ Chí Minh</span>
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M4 6l4 4 4-4" stroke="var(--icon-secondary)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </div>
+      <div class="search-bar">
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M17.5 17.5l-3.625-3.625m1.958-4.708a6.667 6.667 0 11-13.333 0 6.667 6.667 0 0113.333 0z" stroke="var(--icon-tertiary)" stroke-width="1.5" stroke-linecap="round"/></svg>
+        <input type="text" placeholder="Tìm kiếm trên Chợ Tốt">
+      </div>
+    </div>
+
+    <div class="topnav-actions">
+      <button class="icon-btn" aria-label="Thông báo">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M18 8A6 6 0 106 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 01-3.46 0"/></svg>
+      </button>
+      <button class="icon-btn" aria-label="Chat">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>
+      </button>
+      <button class="icon-btn" aria-label="Yêu thích">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg>
+      </button>
+      <button class="btn-tertiary" style="margin-left:4px;">Quản lý tin</button>
+      <button class="btn-primary">
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M10 4.167v11.666M4.167 10h11.666" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+        Đăng tin
+      </button>
+      <div style="width:40px;height:40px;border-radius:50%;background:var(--bg-tertiary);margin-left:4px;"></div>
+    </div>
+  </nav>
+
+  <!-- ===== PAGE CONTENT ===== -->
+  <div class="page-container">
+
+    <!-- Breadcrumbs (DS) -->
+    <div class="breadcrumbs">
+      <a href="#">Chợ Tốt</a> <span class="sep">/</span>
+      <a href="#">Xe cộ</a> <span class="sep">/</span>
+      <a href="#">Ô tô</a> <span class="sep">/</span>
+      <a href="#">Tp Hồ Chí Minh</a> <span class="sep">/</span>
+      <span class="current">Toyota Camry 2.5Q 2023 - Trắng Ngọc Trai</span>
+    </div>
+
+    <!-- ===== LEFT COLUMN ===== -->
+    <div class="left-col">
+
+      <!-- Image Gallery -->
+      <div>
+        <div class="gallery" id="mainGallery">
+          <img class="gallery-main-img" id="mainImg" src="https://images.unsplash.com/photo-1621007947382-bb3c3994e3fb?w=800&h=600&fit=crop" alt="Toyota Camry 2023">
+          <button class="gallery-nav prev" onclick="prevImage()">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M15 18l-6-6 6-6"/></svg>
+          </button>
+          <button class="gallery-nav next" onclick="nextImage()">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M9 18l6-6-6-6"/></svg>
+          </button>
+          <div class="gallery-counter">
+            <svg viewBox="0 0 16 16" fill="none"><rect x="1" y="3" width="14" height="10" rx="1.5" stroke="white" stroke-width="1.2"/><circle cx="5" cy="7" r="1.2" stroke="white" stroke-width="1"/><path d="M1 11l3.5-3 2.5 2 3-3.5L14 11" stroke="white" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            <span id="imgCounter">1 / 8</span>
+          </div>
+        </div>
+        <div class="gallery-thumbs">
+          <div class="gallery-thumb active" onclick="goToImage(0)"><img src="https://images.unsplash.com/photo-1621007947382-bb3c3994e3fb?w=120&h=90&fit=crop" alt=""></div>
+          <div class="gallery-thumb" onclick="goToImage(1)"><img src="https://images.unsplash.com/photo-1619767886558-efdc259cde1a?w=120&h=90&fit=crop" alt=""></div>
+          <div class="gallery-thumb" onclick="goToImage(2)"><img src="https://images.unsplash.com/photo-1549399542-7e3f8b79c341?w=120&h=90&fit=crop" alt=""></div>
+          <div class="gallery-thumb" onclick="goToImage(3)"><img src="https://images.unsplash.com/photo-1590362891991-f776e747a588?w=120&h=90&fit=crop" alt=""></div>
+          <div class="gallery-thumb" onclick="goToImage(4)"><img src="https://images.unsplash.com/photo-1583121274602-3e2820c69888?w=120&h=90&fit=crop" alt=""></div>
+          <div class="gallery-thumb" onclick="goToImage(5)"><img src="https://images.unsplash.com/photo-1552519507-da3b142c6e3d?w=120&h=90&fit=crop" alt=""></div>
+        </div>
+      </div>
+
+      <!-- Title + Price Card -->
+      <div class="card">
+        <div class="price-row">
+          <span class="price-value">1.150.000.000 đ</span>
+          <div class="price-actions">
+            <button class="icon-btn" aria-label="Chia sẻ" style="color:var(--icon-secondary)">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>
+            </button>
+            <button class="icon-btn" id="favBtn" aria-label="Yêu thích" onclick="toggleFav()" style="color:var(--icon-secondary)">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg>
+            </button>
+          </div>
+        </div>
+        <h1 class="listing-title">Toyota Camry 2.5Q 2023 - Trắng Ngọc Trai, Nội thất đen, Lăn bánh 12.000km</h1>
+        <div class="meta-row">
+          <div class="meta-item">
+            <svg viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="6.5" stroke="currentColor" stroke-width="1.2"/><path d="M8 4.5V8l2.5 1.5" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg>
+            Đăng 2 giờ trước
+          </div>
+          <div class="meta-item">
+            <svg viewBox="0 0 16 16" fill="none"><path d="M8 1.333A5.172 5.172 0 002.833 6.5C2.833 10.167 8 14.667 8 14.667s5.167-4.5 5.167-8.167A5.172 5.172 0 008 1.333z" stroke="currentColor" stroke-width="1.2"/><circle cx="8" cy="6.5" r="1.5" stroke="currentColor" stroke-width="1.2"/></svg>
+            Quận 7, Tp Hồ Chí Minh
+          </div>
+          <div class="meta-item">
+            <svg viewBox="0 0 16 16" fill="none"><path d="M1.333 8a6.667 6.667 0 1013.334 0A6.667 6.667 0 001.333 8z" stroke="currentColor" stroke-width="1.2"/><path d="M8 5.333v2.934l2 2" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg>
+            Tin số: 12345678
+          </div>
+        </div>
+      </div>
+
+      <!-- Specifications Card -->
+      <div class="card">
+        <h2 class="heading-section">Thông tin chi tiết</h2>
+        <div class="specs-table">
+          <div class="spec-row">
+            <span class="spec-label">Hãng xe</span>
+            <span class="spec-value">Toyota</span>
+          </div>
+          <div class="spec-row">
+            <span class="spec-label">Dòng xe</span>
+            <span class="spec-value">Camry</span>
+          </div>
+          <div class="spec-row">
+            <span class="spec-label">Năm sản xuất</span>
+            <span class="spec-value">2023</span>
+          </div>
+          <div class="spec-row">
+            <span class="spec-label">Kiểu dáng</span>
+            <span class="spec-value">Sedan</span>
+          </div>
+          <div class="spec-row">
+            <span class="spec-label">Số km đã đi</span>
+            <span class="spec-value">12.000 km</span>
+          </div>
+          <div class="spec-row">
+            <span class="spec-label">Nhiên liệu</span>
+            <span class="spec-value">Xăng</span>
+          </div>
+          <div class="spec-row">
+            <span class="spec-label">Hộp số</span>
+            <span class="spec-value">Tự động</span>
+          </div>
+          <div class="spec-row">
+            <span class="spec-label">Xuất xứ</span>
+            <span class="spec-value">Nhập khẩu</span>
+          </div>
+          <div class="spec-row">
+            <span class="spec-label">Màu ngoại thất</span>
+            <span class="spec-value">Trắng Ngọc Trai</span>
+          </div>
+          <div class="spec-row">
+            <span class="spec-label">Số chỗ</span>
+            <span class="spec-value">5 chỗ</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Description Card -->
+      <div class="card">
+        <h2 class="heading-section">Mô tả tin đăng</h2>
+        <div id="descriptionContainer">
+          <p class="description-text" id="descText">Toyota Camry 2.5Q 2023 — Phiên bản cao cấp nhất dòng Camry, nhập khẩu nguyên chiếc từ Thái Lan.
+
+Xe mới mua tháng 06/2023, sử dụng kỹ, bảo dưỡng định kỳ tại hãng Toyota. Lăn bánh chỉ 12.000km, tình trạng như mới 99%.
+
+Trang bị nổi bật:
+- Động cơ 2.5L, công suất 207 mã lực
+- Hộp số tự động 8 cấp
+- Cửa sổ trời panorama
+- Hệ thống an toàn Toyota Safety Sense 3.0
+- Camera 360 độ, cảm biến trước sau
+- Ghế da cao cấp, chỉnh điện 10 hướng
+- Màn hình giải trí 9 inch, Apple CarPlay / Android Auto
+- Đèn LED ma trận thích ứng
+
+Giấy tờ đầy đủ, chính chủ, sang tên nhanh. Hỗ trợ trả góp ngân hàng lên đến 70%.
+Liên hệ xem xe trực tiếp tại Quận 7, TP.HCM.</p>
+        </div>
+      </div>
+
+      <!-- Location Card -->
+      <div class="card">
+        <h2 class="heading-section">Khu vực</h2>
+        <div class="meta-row">
+          <div class="meta-item" style="font-size:14px;">
+            <svg viewBox="0 0 20 20" fill="none" style="width:20px;height:20px"><path d="M10 1.667A5.838 5.838 0 004.167 7.5C4.167 12.083 10 18.333 10 18.333s5.833-6.25 5.833-10.833A5.838 5.838 0 0010 1.667z" fill="var(--icon-brand)"/><circle cx="10" cy="7.5" r="2.083" fill="white"/></svg>
+            Quận 7, Tp Hồ Chí Minh
+          </div>
+        </div>
+        <div class="map-placeholder">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polygon points="1 6 1 22 8 18 16 22 23 18 23 2 16 6 8 2 1 6"/><line x1="8" y1="2" x2="8" y2="18"/><line x1="16" y1="6" x2="16" y2="22"/></svg>
+          Xem bản đồ
+        </div>
+      </div>
+
+    </div>
+
+    <!-- ===== RIGHT COLUMN ===== -->
+    <div class="right-col">
+
+      <!-- Seller Card -->
+      <div class="seller-card">
+        <div class="seller-header">
+          <div class="seller-avatar" style="display:flex;align-items:center;justify-content:center;background:var(--chotot-75);font-size:28px;font-weight:700;color:var(--text-on-background);">N</div>
+          <div class="seller-info">
+            <div class="seller-name">
+              Nguyễn Văn Minh
+              <span class="badge-pro">
+                <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M6 1l1.545 3.13L11 4.635 8.5 7.07l.59 3.44L6 8.885 2.91 10.51l.59-3.44L1 4.635l3.455-.505L6 1z" fill="currentColor"/></svg>
+                PRO
+              </span>
+            </div>
+            <div class="seller-stats">
+              <span>Đang bán 15 tin</span>
+              <span class="dot"></span>
+              <span>Đã bán 42 xe</span>
+            </div>
+            <div class="seller-response">
+              <svg viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="6" stroke="currentColor" stroke-width="1.2"/><path d="M5.5 8l1.5 1.5 3.5-3.5" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              Phản hồi trong vài phút
+            </div>
+          </div>
+        </div>
+
+        <div class="seller-actions">
+          <button class="phone-btn" onclick="revealPhone()">
+            <svg viewBox="0 0 20 20" fill="none"><path d="M18.333 14.1v2.5a1.667 1.667 0 01-1.816 1.667 16.492 16.492 0 01-7.192-2.559 16.25 16.25 0 01-5-5 16.491 16.491 0 01-2.558-7.225A1.667 1.667 0 013.433 1.667h2.5A1.667 1.667 0 017.6 3.1c.106.8.303 1.585.584 2.342a1.667 1.667 0 01-.375 1.758L6.725 8.283a13.333 13.333 0 005 5l1.083-1.083a1.667 1.667 0 011.759-.375c.756.281 1.541.477 2.341.583a1.667 1.667 0 011.425 1.692z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+            <span id="phoneText">Bấm để hiện số</span>
+          </button>
+          <button class="chat-btn">
+            <svg viewBox="0 0 20 20" fill="none"><path d="M17.5 12.5a1.667 1.667 0 01-1.667 1.667H5.833L2.5 17.5V4.167A1.667 1.667 0 014.167 2.5h11.666A1.667 1.667 0 0117.5 4.167V12.5z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+            Chat với người bán
+          </button>
+        </div>
+
+        <a class="view-profile-link" href="#">Xem trang cá nhân</a>
+      </div>
+
+      <!-- Safety Tips -->
+      <div class="safety-card">
+        <div class="safety-header">
+          <svg viewBox="0 0 20 20" fill="none"><path d="M10 1.667l6.667 3.333v5c0 4.167-2.834 8.067-6.667 9.333C6.167 18.067 3.333 14.167 3.333 10V5L10 1.667z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          Lưu ý an toàn
+        </div>
+        <div class="safety-list">
+          <div class="safety-item">
+            <svg viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="6" stroke="currentColor" stroke-width="1.2"/><path d="M5.5 8l1.5 1.5 3.5-3.5" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            Kiểm tra xe kỹ trước khi mua
+          </div>
+          <div class="safety-item">
+            <svg viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="6" stroke="currentColor" stroke-width="1.2"/><path d="M5.5 8l1.5 1.5 3.5-3.5" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            Không chuyển tiền trước khi nhận xe
+          </div>
+          <div class="safety-item">
+            <svg viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="6" stroke="currentColor" stroke-width="1.2"/><path d="M5.5 8l1.5 1.5 3.5-3.5" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            Xác minh giấy tờ pháp lý đầy đủ
+          </div>
+          <div class="safety-item">
+            <svg viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="6" stroke="currentColor" stroke-width="1.2"/><path d="M5.5 8l1.5 1.5 3.5-3.5" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            Giao dịch trực tiếp, gặp mặt người bán
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- ===== RELATED LISTINGS ===== -->
+    <div class="related-section">
+      <h2 class="display-caption">Tin đăng tương tự</h2>
+      <div class="related-grid">
+        <div class="related-card">
+          <img class="related-img" src="https://images.unsplash.com/photo-1619767886558-efdc259cde1a?w=400&h=300&fit=crop" alt="">
+          <div class="related-body">
+            <div class="related-title">Honda Civic RS 2023 - Đỏ cá tính, full option</div>
+            <div class="related-price">870.000.000 đ</div>
+            <div class="related-meta"><span>15.000 km</span><span class="dot"></span><span>Quận 2</span></div>
+          </div>
+        </div>
+        <div class="related-card">
+          <img class="related-img" src="https://images.unsplash.com/photo-1549399542-7e3f8b79c341?w=400&h=300&fit=crop" alt="">
+          <div class="related-body">
+            <div class="related-title">Mazda 3 1.5L Luxury 2023 - Xanh đậm, nội thất kem</div>
+            <div class="related-price">685.000.000 đ</div>
+            <div class="related-meta"><span>8.500 km</span><span class="dot"></span><span>Quận 1</span></div>
+          </div>
+        </div>
+        <div class="related-card">
+          <img class="related-img" src="https://images.unsplash.com/photo-1590362891991-f776e747a588?w=400&h=300&fit=crop" alt="">
+          <div class="related-body">
+            <div class="related-title">Toyota Corolla Cross 1.8V HEV 2024 - Hybrid tiết kiệm</div>
+            <div class="related-price">920.000.000 đ</div>
+            <div class="related-meta"><span>3.200 km</span><span class="dot"></span><span>Bình Thạnh</span></div>
+          </div>
+        </div>
+        <div class="related-card">
+          <img class="related-img" src="https://images.unsplash.com/photo-1583121274602-3e2820c69888?w=400&h=300&fit=crop" alt="">
+          <div class="related-body">
+            <div class="related-title">Hyundai Tucson 2.0 Đặc biệt 2023 - Đen huyền bí</div>
+            <div class="related-price">885.000.000 đ</div>
+            <div class="related-meta"><span>20.000 km</span><span class="dot"></span><span>Tân Bình</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <script>
+    /* ===== Gallery Navigation ===== */
+    const images = [
+      'https://images.unsplash.com/photo-1621007947382-bb3c3994e3fb?w=800&h=600&fit=crop',
+      'https://images.unsplash.com/photo-1619767886558-efdc259cde1a?w=800&h=600&fit=crop',
+      'https://images.unsplash.com/photo-1549399542-7e3f8b79c341?w=800&h=600&fit=crop',
+      'https://images.unsplash.com/photo-1590362891991-f776e747a588?w=800&h=600&fit=crop',
+      'https://images.unsplash.com/photo-1583121274602-3e2820c69888?w=800&h=600&fit=crop',
+      'https://images.unsplash.com/photo-1552519507-da3b142c6e3d?w=800&h=600&fit=crop',
+      'https://images.unsplash.com/photo-1494976388531-d1058494cdd8?w=800&h=600&fit=crop',
+      'https://images.unsplash.com/photo-1503376780353-7e6692767b70?w=800&h=600&fit=crop'
+    ];
+    let currentImg = 0;
+
+    function updateGallery() {
+      document.getElementById('mainImg').src = images[currentImg];
+      document.getElementById('imgCounter').textContent = (currentImg + 1) + ' / ' + images.length;
+      document.querySelectorAll('.gallery-thumb').forEach((thumb, i) => {
+        thumb.classList.toggle('active', i === currentImg);
+      });
+    }
+    function nextImage() { currentImg = (currentImg + 1) % images.length; updateGallery(); }
+    function prevImage() { currentImg = (currentImg - 1 + images.length) % images.length; updateGallery(); }
+    function goToImage(i) { currentImg = i; updateGallery(); }
+
+    /* ===== Favourite toggle ===== */
+    let isFav = false;
+    function toggleFav() {
+      isFav = !isFav;
+      const btn = document.getElementById('favBtn');
+      const svg = btn.querySelector('svg path');
+      if (isFav) {
+        svg.setAttribute('fill', 'var(--icon-error)');
+        svg.setAttribute('stroke', 'var(--icon-error)');
+        btn.style.color = 'var(--icon-error)';
+      } else {
+        svg.setAttribute('fill', 'none');
+        svg.setAttribute('stroke', 'currentColor');
+        btn.style.color = 'var(--icon-secondary)';
+      }
+    }
+
+    /* ===== Reveal phone ===== */
+    function revealPhone() {
+      document.getElementById('phoneText').textContent = '0912 345 678';
+    }
+
+    /* ===== Keyboard Gallery Nav ===== */
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowLeft') prevImage();
+      if (e.key === 'ArrowRight') nextImage();
+    });
+  </script>
+
+</body>
+</html>
