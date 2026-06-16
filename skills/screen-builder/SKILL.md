@@ -188,23 +188,40 @@ Apply these labels and patterns directly when generating screens — no WebFetch
 
 Tất cả file output PHẢI được lưu vào:
 ```
-/Users/thaoduong/Downloads/screens/<tên-màn-hình>/
+/Users/thaoduong/Downloads/GHProject/<project-name>/<screen-name>/
 ```
 
-Không lưu vào root Downloads, không lưu vào Downloads/HTML, không dùng đường dẫn tương đối.
+Mỗi project có folder riêng bên trong `GHProject/`. Không lưu vào root Downloads, không dùng đường dẫn tương đối.
+
+**Hỏi thêm câu 5 — Tên project** (nếu chưa biết):
+> Màn hình này thuộc project nào? (ví dụ: `chotot-web`, `nhatot-mobile`, `vieclamtot-app`)
+
+Dùng tên project đó làm tên folder cha. Nếu user không cung cấp, tự suy ra từ sản phẩm + thiết bị (ví dụ: Nhà Tốt + Mobile → `nhatot-mobile`).
 
 **Output formats:**
-- **Single:** `/Users/thaoduong/Downloads/screens/<name>/index.html`
-- **Interactive:** `/Users/thaoduong/Downloads/screens/<name>/index.html` — single file với hover/focus/active/error states + JS transitions
-- **Flow:** `/Users/thaoduong/Downloads/screens/<name>/index.html` — tất cả screens xếp dọc nối tiếp nhau
+- **Single:** `/Users/thaoduong/Downloads/GHProject/<project>/<name>/index.html`
+- **Interactive:** `/Users/thaoduong/Downloads/GHProject/<project>/<name>/index.html` — single file với hover/focus/active/error states + JS transitions
+- **Flow:** `/Users/thaoduong/Downloads/GHProject/<project>/<name>/index.html` — tất cả screens xếp dọc nối tiếp nhau
 - **Multiple screens:** Mỗi màn hình một file riêng + `index.html` liệt kê links
   ```
-  /Users/thaoduong/Downloads/screens/<name>/
+  /Users/thaoduong/Downloads/GHProject/<project>/<name>/
   ├── index.html         ← danh sách links
   ├── screen-1.html
   ├── screen-2.html
   └── screen-3.html
   ```
+
+**Ví dụ cấu trúc thực tế:**
+```
+Downloads/GHProject/
+├── chotot-mobile/
+│   ├── listing-detail/
+│   └── checkout/
+├── nhatot-web/
+│   └── project-detail/
+└── vieclamtot-app/
+    └── job-apply/
+```
 
 **Tên thư mục:** Dùng kebab-case, tiếng Anh, ngắn gọn — ví dụ: `job-detail`, `checkout-mobile`, `seller-dashboard`.
 
